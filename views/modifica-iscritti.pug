@@ -1,0 +1,53 @@
+extends layout
+block content
+
+    form(method="POST" action="/percorso/della/tua/api")
+    .form-group
+        label(for="nome") Nome
+        input#nome.form-control(type="text" name="Nome" placeholder="Inserisci il nome" required)
+
+    .form-group
+        label(for="cognome") Cognome
+        input#cognome.form-control(type="text" name="Cognome" placeholder="Inserisci il cognome" required)
+
+    .form-group
+        label(for="email") Email
+        input#email.form-control(type="email" name="Email" placeholder="Inserisci l'email" required)
+
+    .form-group
+        label(for="dataIscrizione") Data Iscrizione
+        input#dataIscrizione.form-control(type="date" name="DataIscrizione" required)
+
+    .form-group
+        label(for="dataUltimoPagamento") Data Ultimo Pagamento
+        input#dataUltimoPagamento.form-control(type="date" name="DataUltimoPagamento" required)
+
+    .form-group
+        label(for="importoUltimoPagamento") Importo Ultimo Pagamento (€)
+        input#importoUltimoPagamento.form-control(type="number" step="0.01" name="ImportoUltimoPagamento" placeholder="Inserisci l'importo" required)
+
+    .form-group
+        label(for="indirizzo") Indirizzo
+        input#indirizzo.form-control(type="text" name="Indirizzo" placeholder="Inserisci l'indirizzo" required)
+
+    .form-group
+        label(for="città") Città
+        input#città.form-control(type="text" name="Città" placeholder="Inserisci la città" required)
+
+    .form-group
+        label(for="cap") CAP
+        input#cap.form-control(type="text" name="CAP" placeholder="Inserisci il CAP" required)
+
+    .form-group
+        label(for="numeroTelefono") Numero di Telefono
+        input#numeroTelefono.form-control(type="tel" name="NumeroTelefono" placeholder="Inserisci il numero di telefono" required)
+
+    .form-group
+        label(for="dataDiNascita") Data di Nascita
+        input#dataDiNascita.form-control(type="date" name="DataDiNascita" required)
+
+    .form-group
+        label(for="fotoProfilo") Foto Profilo
+        input#fotoProfilo.form-control(type="file" name="FotoProfilo")
+
+    button.btn.btn-primary(type="submit") Modifica

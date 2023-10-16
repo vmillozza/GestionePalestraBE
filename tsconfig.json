@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      "target": "es6",              // Specify ECMAScript target version
+      "module": "commonjs",         // Specify module code generation
+      "strict": true,               // Enable all strict type-checking options
+      "esModuleInterop": true,      // Enables emit interoperability between CommonJS and ES Modules
+      "skipLibCheck": true,         // Skip type checking of declaration files
+      "outDir": "./dist",           // Redirect output structure to the directory
+      "types": ["node", "mocha"],   // List of type declaration file names to be included in compilation
+      "resolveJsonModule": true ,
+      "moduleResolution": "node",
+      "allowJs": true    // Include modules imported with .json extension
+    },
+    "include": [
+      "src/**/*.ts",                // Source files
+      "test/**/*.ts",               // Test files
+      "types/**/*.d.ts",
+      "data/**/*",             // Custom type definitions
+    ],
+    "exclude": [
+      "node_modules"                // Exclude Node.js modules
+    ]
+  }
+  

@@ -1,0 +1,83 @@
+extends layout
+
+block content
+  .container
+    h1.mt-5 Lista Iscritti
+    table.table.table-responsive(id="dtIscritti" cellspacing="0" width="100%" max-height="300px")
+      thead
+        tr
+          th 
+          th Nome
+          th Cognome
+          th Email
+          th Data Iscrizione
+          th Data Ultimo Pag
+          th Imp. Ultimo Pag
+          th 
+          th
+      tbody
+        each iscritto in iscritti
+          tr(id=`${iscritto.ID}`)
+            td
+              i.fas.fa-user(style="color:#17303d;cursor: pointer;")
+            td= iscritto.Nome
+            td= iscritto.Cognome
+            td= iscritto.Email
+            td= iscritto.DataIscrizione.toDateString()
+            td= iscritto.DataUltimoPagamento.toDateString()
+            td= new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(iscritto.ImportoUltimoPagamento)
+            td 
+              i.fas.fa-times(style="color:red;cursor: pointer;" onclick=`deleteIconClick(${iscritto.ID})`)
+            td 
+              i.fas.fa-pencil-alt(style="cursor: pointer;" onclick=`updateIconClick(${iscritto.ID})`)
+
+  script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+  script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js")
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+  script(src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js")
+  script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+     
+  script.
+    // Basic example
+    $(document).ready( function () {
+      $('#dtIscritti').DataTable();
+    });
+
+    function deleteIconClick(id) {
+      if (!id) {
+        console.error(`PID ${id} mancante`);
+        return;
+      }
+      const userConfirmed = confirm(`Sei sicuro di voler eliminare questo elemento?`);
+      if (userConfirmed) {
+        axios.put(`/api/deleteiscritto?id=${id}`)
+          .then(response => {
+            if(response.status == 200) {
+              console.log(response.data);
+              $('#dtIscritti').DataTable().row(`#${id}`).remove().draw();
+            }
+          })
+          .catch(error => {
+            console.error('Errore nella chiamata Axios:', error);
+          });
+      }
+    }
+    function updateIconClick(id) {
+      if (!id) {
+        console.error(`PID ${id} mancante`);
+        return;
+      }
+      const userConfirmed = confirm(`Sei sicuro di voler modificare questo elemento?`);
+      if (userConfirmed) {
+        axios.put(`/api/modificaiscritto?id=${id}`)
+          .then(response => {
+            if(response.status == 200) {
+              console.log(response.data);
+              $('#dtIscritti').DataTable().row(`#${id}`).remove().draw();
+            }
+          })
+          .catch(error => {
+            console.error('Errore nella chiamata Axios:', error);
+          });
+      }
+    }
